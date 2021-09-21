@@ -8,18 +8,16 @@ import Login from './auth/Login';
 import Dashboard from './Dashboard';
 import Profile from './Profile';
 import About from './About';
-import Add from './Add';
 import MyAds from './MyAds';
 // Style
 import { GlobalStyles } from '../style/mainStyles';
 import StyledContainer from '../style/Container';
+import NewAd from './NewAd';
 
 const App = () => {
-  /* const { theme, lightTheme, darkTheme } = useMainContext(); */
 
   return (<>
     <Router>
-      {/* <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> */}
       <GlobalStyles />
 
       <MainContextProvider>
@@ -31,7 +29,7 @@ const App = () => {
             <PrivateRoute path={ROUTES.DASHBOARD} component={Dashboard} />
             <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
             <PrivateRoute path={ROUTES.ABOUT} component={About} />
-            <PrivateRoute path={ROUTES.ADD} component={Add} />
+            <PrivateRoute path={ROUTES.NEWAD} component={NewAd} />
             <PrivateRoute path={ROUTES.MYADS} component={MyAds} />
           </Switch>
         </StyledContainer>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useMainContext } from '../context/MainContext';
 import styled from 'styled-components';
 import { db } from '../firebase';
+import { v4 as uuid } from 'uuid'
 
 const TempSection = styled.section`
     display: flex;
@@ -43,7 +44,7 @@ const TempSection = styled.section`
     }
 `;
 
-export default function Add() {
+export default function NewAd() {
     const adTitleRef = useRef();
     const adDetailsRef = useRef();
     const [area, setArea] = useState();
@@ -64,11 +65,11 @@ export default function Add() {
                     documents.push(doc.data());
                 });
                 let areaIs = documents[0].area;
-                //console.log(areaIs);
                 setArea(areaIs);
             });
     }, [currentUser.uid]);
 
+    // new add
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -76,19 +77,19 @@ export default function Add() {
             setError("");
             setLoading(true);
 
-            // Add to users ads in firestore
-            db.collection("users")
-                .doc(currentUser.uid)
-                .collection("ads")
-                .add({
+            let newId = uuid();
+
+            // add to firestore
+            db.collection("ads")
+                .doc(newId)
+                .set({
+                    id: newId,
+                    authorId: currentUser.uid,
                     authorEmail: currentUser.email,
                     adTitle: adTitleRef.current.value,
                     adDetails: adDetailsRef.current.value,
                     area,
                 })
-
-            // add to ALL ads in firestore
-
 
             alert('Klart! Gå till annonser för att se din nya annons :)')
             adTitleRef.current.value = "";

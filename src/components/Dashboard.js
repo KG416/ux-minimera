@@ -4,7 +4,12 @@ import { db } from '../firebase';
 
 export default function Dashboard() {
     const [currentArea, setCurrentArea] = useState("");
+    const [currentAreaInSwedish, setCurrentAreaInSwedish] = useState("");
     const { currentUser } = useMainContext();
+    const [ads, setAds] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const adsInFb = db.collection("ads");
 
     // get area from firestore
     useEffect(() => {
@@ -18,30 +23,59 @@ export default function Dashboard() {
                 snapshot.docs.forEach((doc) => {
                     documents.push(doc.data());
                 });
-                let areaIs = documents[0].area;
+                setCurrentArea(documents[0].area)
 
-                if (areaIs === 'south') {
-                    setCurrentArea('Söder');
-                } else if (areaIs === 'center') {
-                    setCurrentArea('Centrum');
-                } else if (areaIs === 'north') {
-                    setCurrentArea('Norr');
-                } else if (areaIs === 'west') {
-                    setCurrentArea('Väster');
-                } else if (areaIs === 'east') {
-                    setCurrentArea('Öster');
+                // translate area to swedish for rendering
+                if (currentArea === 'south') {
+                    setCurrentAreaInSwedish('Söder');
+                } else if (currentArea === 'center') {
+                    setCurrentAreaInSwedish('Centrum');
+                } else if (currentArea === 'north') {
+                    setCurrentAreaInSwedish('Norr');
+                } else if (currentArea === 'west') {
+                    setCurrentAreaInSwedish('Väster');
+                } else if (currentArea === 'east') {
+                    setCurrentAreaInSwedish('Öster');
                 }
-
             });
-    }, [currentUser.uid]);
+    }, [currentUser.uid, currentArea]);
 
     // get ads from current area
+    const getAllAds = () => {
+        setLoading(true)
+        adsInFb
+            // only ads from current area
+            .where("area", "==", currentArea)
+            .onSnapshot(querySnapshot => {
+                const items = []
+                querySnapshot.forEach(doc => {
+                    items.push(doc.data())
+                })
+                setAds(items)
+                setLoading(false)
+            })
+    }
+
+    useEffect(() => {
+        getAllAds()
+    }, [currentArea])
 
     return (
         <>
             <h1>Annonser</h1>
             <p>Vald stadsdel:</p>
-            <h2>{currentArea}</h2>
+            <h2>{currentAreaInSwedish}</h2>
+            {loading && <p>Loading...</p>}
+
+            {ads ?
+                ads.map(ad => (
+                    <div key={ad.id}>
+                        <h2>{ad.adTitle}</h2>
+                        <p>{ad.adDetails}</p>
+                    </div>
+                ))
+                : <p> "No ads available :( After someone has created some, you'll see them here..."</p>
+            }
         </>
     )
 }

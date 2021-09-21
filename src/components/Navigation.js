@@ -71,7 +71,7 @@ const Navigation = () => {
           </Link>
         </li>
         <li>
-          <Link to={ROUTES.ADD}>
+          <Link to={ROUTES.NEWAD}>
             <FontAwesomeIcon icon={faPlus} />
             <p>Annons</p>
           </Link>
