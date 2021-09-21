@@ -3,12 +3,21 @@ import { db } from '../firebase';
 import styled from 'styled-components';
 import { useMainContext } from '../context/MainContext';
 
-const StyledBtn = styled.button`
-    padding: 3px;
-    width: 50px;
-    cursor: pointer;
-    :hover {
+// temp styling
+const StyledDiv = styled.div`
+    .adCard {
+        border: 2px solid red;
+        margin: 5px;
+        padding: 5px;
+    }
+    button {
+        cursor: pointer;
+        padding: 3px;
+        margin: 3px;
+        width: 80px;
+        &:hover {
         border: 1px solid black;
+    }
     }
 `;
 
@@ -51,21 +60,21 @@ export default function MyAds() {
     }, [])
 
     return (
-        <>
+        <StyledDiv>
             <h1>Mina annonser</h1>
 
             {loading && <p>Loading...</p>}
 
             {ads ?
                 ads.map(ad => (
-                    <div key={ad.id}>
+                    <div key={ad.id} className="adCard">
                         <h2>{ad.adTitle}</h2>
                         <p>{ad.adDetails}</p>
-                        <StyledBtn onClick={() => deleteAd(ad)}>X</StyledBtn>
+                        <button onClick={() => deleteAd(ad)}>Ta bort</button>
                     </div>
                 ))
                 : <p> "No ads :( After you've created them, you'll see them here..."</p>
             }
-        </>
+        </StyledDiv>
     )
 }

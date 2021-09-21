@@ -6,4 +6,4 @@ export const ABOUT = "/about";
 export const NEWAD = "/newad";
 export const MYADS = "/myads";
 
-export const ADDETAILS = "/addetails";
+export const ADDETAILS = "/addetails/:id";

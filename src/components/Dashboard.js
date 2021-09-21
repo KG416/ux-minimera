@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useMainContext } from '../context/MainContext';
 import { db } from '../firebase';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+// temp styling
+const StyledDiv = styled.div`
+    .adCard {
+        cursor: pointer;
+        border: 2px solid red;
+        margin: 5px;
+        padding: 5px;
+        &:hover {
+        background: lightgray;
+    }
+    }
+`;
 
 export default function Dashboard() {
     const [currentArea, setCurrentArea] = useState("");
@@ -40,7 +55,7 @@ export default function Dashboard() {
             });
     }, [currentUser.uid, currentArea]);
 
-    // get ads from current area
+    // get ads
     const getAllAds = () => {
         setLoading(true)
         adsInFb
@@ -61,7 +76,7 @@ export default function Dashboard() {
     }, [currentArea])
 
     return (
-        <>
+        <StyledDiv>
             <h1>Annonser</h1>
             <p>Vald stadsdel:</p>
             <h2>{currentAreaInSwedish}</h2>
@@ -69,13 +84,16 @@ export default function Dashboard() {
 
             {ads ?
                 ads.map(ad => (
-                    <div key={ad.id}>
-                        <h2>{ad.adTitle}</h2>
-                        <p>{ad.adDetails}</p>
+                    <div key={ad.id} className="adCard">
+                        <Link to={`/addetails/${ad.id}`}>
+                            <h2>{ad.adTitle}</h2>
+                            <p>{ad.adDetails}</p>
+                            <p>Annonsör: {ad.authorName}</p>
+                        </Link>
                     </div>
                 ))
                 : <p> "No ads available :( After someone has created some, you'll see them here..."</p>
             }
-        </>
+        </StyledDiv>
     )
 }

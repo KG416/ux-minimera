@@ -13,6 +13,7 @@ import MyAds from './MyAds';
 import { GlobalStyles } from '../style/mainStyles';
 import StyledContainer from '../style/Container';
 import NewAd from './NewAd';
+import AdDetails from './AdDetails';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
             <PrivateRoute path={ROUTES.ABOUT} component={About} />
             <PrivateRoute path={ROUTES.NEWAD} component={NewAd} />
             <PrivateRoute path={ROUTES.MYADS} component={MyAds} />
+            <PrivateRoute path={ROUTES.ADDETAILS} component={AdDetails} />
           </Switch>
         </StyledContainer>
         <Navigation />

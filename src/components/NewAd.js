@@ -3,6 +3,7 @@ import { useMainContext } from '../context/MainContext';
 import styled from 'styled-components';
 import { db } from '../firebase';
 import { v4 as uuid } from 'uuid'
+import { useHistory } from 'react-router';
 
 const TempSection = styled.section`
     display: flex;
@@ -48,11 +49,13 @@ export default function NewAd() {
     const adTitleRef = useRef();
     const adDetailsRef = useRef();
     const [area, setArea] = useState();
+    const [name, setName] = useState();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const { currentUser } = useMainContext();
+    const history = useHistory();
 
-    // get area from firestore
+    // get area & name from firestore
     useEffect(() => {
         db.collection("users")
             .doc(currentUser.uid)
@@ -64,8 +67,8 @@ export default function NewAd() {
                 snapshot.docs.forEach((doc) => {
                     documents.push(doc.data());
                 });
-                let areaIs = documents[0].area;
-                setArea(areaIs);
+                setArea(documents[0].area);
+                setName(documents[0].name);
             });
     }, [currentUser.uid]);
 
@@ -86,14 +89,17 @@ export default function NewAd() {
                     id: newId,
                     authorId: currentUser.uid,
                     authorEmail: currentUser.email,
+                    authorName: name,
                     adTitle: adTitleRef.current.value,
                     adDetails: adDetailsRef.current.value,
                     area,
                 })
 
-            alert('Klart! Gå till annonser för att se din nya annons :)')
-            adTitleRef.current.value = "";
-            adDetailsRef.current.value = "";
+            alert('Annons tillagd!')
+            history.push("/myads");
+
+            /* adTitleRef.current.value = "";
+            adDetailsRef.current.value = ""; */
 
         } catch {
             setError("Kunde ej skapa annons");
