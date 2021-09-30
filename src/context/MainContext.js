@@ -8,7 +8,6 @@ export function useMainContext() {
 }
 
 export function MainContextProvider({ children }) {
-    // Auth
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -28,10 +27,8 @@ export function MainContextProvider({ children }) {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
             setLoading(false);
-            //as soon as we have a user, setLoading changes to false
         });
         return unsubscribe;
-        //unsubscribe will unsubscribe us from the onAuthState-listener when it's unmounted
     }, []);
 
     const value = {
@@ -44,7 +41,6 @@ export function MainContextProvider({ children }) {
     return (
         <MainContext.Provider value={value}>
             {!loading && children}
-            {/* if we're not loading, we'll render out the children */}
         </MainContext.Provider>
     );
 }

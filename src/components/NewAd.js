@@ -57,19 +57,26 @@ export default function NewAd() {
 
     // get area & name from firestore
     useEffect(() => {
-        db.collection("users")
-            .doc(currentUser.uid)
-            .collection("userInfo")
-            .get()
-            // This is async, so it returns a promise
-            .then((snapshot) => {
-                let documents = [];
-                snapshot.docs.forEach((doc) => {
-                    documents.push(doc.data());
+        let unmounted = false;
+
+        if (!unmounted) {
+            db.collection("users")
+                .doc(currentUser.uid)
+                .collection("userInfo")
+                .get()
+                .then((snapshot) => {
+                    let documents = [];
+                    snapshot.docs.forEach((doc) => {
+                        documents.push(doc.data());
+                    });
+                    setArea(documents[0].area);
+                    setName(documents[0].name);
                 });
-                setArea(documents[0].area);
-                setName(documents[0].name);
-            });
+        }
+
+        return () => {
+            unmounted = true;
+        }
     }, [currentUser.uid]);
 
     // new add
@@ -95,17 +102,13 @@ export default function NewAd() {
                     area,
                 })
 
+            setLoading(false);
             alert('Annons tillagd!')
             history.push("/myads");
-
-            /* adTitleRef.current.value = "";
-            adDetailsRef.current.value = ""; */
-
         } catch {
+            setLoading(false);
             setError("Kunde ej skapa annons");
         }
-        setLoading(false);
-
     }
 
     return (

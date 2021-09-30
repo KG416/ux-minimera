@@ -65,7 +65,10 @@ export default function MyAds() {
 
             {loading && <p>Loading...</p>}
 
-            {ads ?
+            {!loading && !ads.length > 0 &&
+                <p> Inga annonser att visa :( Efter du gjort en annons visas den här.</p>}
+
+            {ads.length > 0 &&
                 ads.map(ad => (
                     <div key={ad.id} className="adCard">
                         <h2>{ad.adTitle}</h2>
@@ -73,7 +76,6 @@ export default function MyAds() {
                         <button onClick={() => deleteAd(ad)}>Ta bort</button>
                     </div>
                 ))
-                : <p> "No ads :( After you've created them, you'll see them here..."</p>
             }
         </StyledDiv>
     )

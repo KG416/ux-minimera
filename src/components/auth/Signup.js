@@ -78,11 +78,12 @@ export default function Signup() {
                     area,
                 })
 
+            setLoading(false);
             history.push("/");
         } catch {
             setError("Kunde ej skapa konto");
+            setLoading(false);
         }
-        setLoading(false);
     }
     return (
         <>
