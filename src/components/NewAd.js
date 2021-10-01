@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { useMainContext } from '../context/MainContext';
 import styled from 'styled-components';
 import { db } from '../firebase';
@@ -48,36 +48,15 @@ const TempSection = styled.section`
 export default function NewAd() {
     const adTitleRef = useRef();
     const adDetailsRef = useRef();
-    const [area, setArea] = useState();
-    const [name, setName] = useState();
+    /* const [area, setArea] = useState();
+    const [name, setName] = useState(); */
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const { currentUser } = useMainContext();
     const history = useHistory();
 
     // get area & name from firestore
-    useEffect(() => {
-        let unmounted = false;
 
-        if (!unmounted) {
-            db.collection("users")
-                .doc(currentUser.uid)
-                .collection("userInfo")
-                .get()
-                .then((snapshot) => {
-                    let documents = [];
-                    snapshot.docs.forEach((doc) => {
-                        documents.push(doc.data());
-                    });
-                    setArea(documents[0].area);
-                    setName(documents[0].name);
-                });
-        }
-
-        return () => {
-            unmounted = true;
-        }
-    }, [currentUser.uid]);
 
     // new add
     async function handleSubmit(e) {
@@ -87,23 +66,39 @@ export default function NewAd() {
             setError("");
             setLoading(true);
 
+            let area;
+            let authorName;
+
+            await db.collection("users")
+                .doc(currentUser.uid)
+                .collection("userInfo")
+                .get()
+                .then((snapshot) => {
+                    let documents = [];
+                    snapshot.docs.forEach((doc) => {
+                        documents.push(doc.data());
+                    });
+                    area = documents[0].area;
+                    authorName = documents[0].name;
+                });
+
             let newId = uuid();
 
             // add to firestore
-            db.collection("ads")
+            await db.collection("ads")
                 .doc(newId)
                 .set({
                     id: newId,
                     authorId: currentUser.uid,
                     authorEmail: currentUser.email,
-                    authorName: name,
+                    authorName,
+                    area,
                     adTitle: adTitleRef.current.value,
                     adDetails: adDetailsRef.current.value,
-                    area,
                 })
 
             setLoading(false);
-            alert('Annons tillagd!')
+            //alert('Annons tillagd!')
             history.push("/myads");
         } catch {
             setLoading(false);

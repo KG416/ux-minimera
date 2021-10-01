@@ -29,9 +29,8 @@ export default function AdDetails() {
     const [contactClicked, setContactClicked] = useState(false)
     const [email, setEmail] = useState()
     const [name, setName] = useState()
-    const [displayedEmail, setDisplayedEmail] = useState()
 
-    // get email from firestore
+    // get email from db
     useEffect(() => {
         db.collection("ads")
             // only add ads from current user
@@ -47,10 +46,9 @@ export default function AdDetails() {
     }, []);
 
     // get ads
-    const getAd = () => {
+    useEffect(() => {
         setLoading(true)
         adsInFb
-            // find ad by id
             .where("id", "==", id)
             .onSnapshot(querySnapshot => {
                 const items = []
@@ -60,21 +58,11 @@ export default function AdDetails() {
                 setAd(items)
                 setLoading(false)
             })
-    }
-
-    useEffect(() => {
-        getAd()
     }, [])
 
     const clickedOnContact = () => {
-        setDisplayedEmail(email)
         setContactClicked(contactClicked => !contactClicked)
     }
-
-    console.log("clickedOnContact = " + clickedOnContact);
-    console.log("email = " + email);
-
-    {/* <button href={`mailto:${email}`}>{email}</button> */ }
 
     return (
         <StyledDiv>

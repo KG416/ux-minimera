@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { db } from '../firebase';
 import styled from 'styled-components';
-import { useMainContext } from '../context/MainContext';
+import useUserAds from './hooks/useUserAds';
 
 // temp styling
 const StyledDiv = styled.div`
@@ -22,42 +20,7 @@ const StyledDiv = styled.div`
 `;
 
 export default function MyAds() {
-    const [ads, setAds] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const { currentUser } = useMainContext();
-
-    const adsInFb = db.collection("ads");
-    const currentUserId = currentUser.uid;
-
-    // [] Make into a hook later?
-    const getUserAds = () => {
-        setLoading(true)
-        adsInFb
-            // only add ads from current user
-            .where("authorId", "==", currentUserId)
-            .onSnapshot(querySnapshot => {
-                const items = []
-                querySnapshot.forEach(doc => {
-                    items.push(doc.data())
-                })
-                setAds(items)
-                setLoading(false)
-            })
-    }
-
-    // delete ad
-    const deleteAd = ad => {
-        adsInFb
-            .doc(ad.id)
-            .delete()
-            .catch((err) => {
-                console.error(err);
-            });
-    }
-
-    useEffect(() => {
-        getUserAds()
-    }, [])
+    const { loading, ads, deleteAd } = useUserAds();
 
     return (
         <StyledDiv>

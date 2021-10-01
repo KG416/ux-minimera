@@ -82,7 +82,10 @@ export default function Dashboard() {
             <h2>{currentAreaInSwedish}</h2>
             {loading && <p>Loading...</p>}
 
-            {ads ?
+            {!loading && !ads.length > 0 &&
+                <p> Inga annonser att visa för denna stadsdel. Efter annonser skapats visas de här.</p>}
+
+            {ads.length > 0 &&
                 ads.map(ad => (
                     <div key={ad.id} className="adCard">
                         <Link to={`/addetails/${ad.id}`}>
@@ -92,7 +95,6 @@ export default function Dashboard() {
                         </Link>
                     </div>
                 ))
-                : <p> "No ads available :( After someone has created some, you'll see them here..."</p>
             }
         </StyledDiv>
     )
