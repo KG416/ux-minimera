@@ -7,7 +7,7 @@ const useUserAds = () => {
     const [ads, setAds] = useState([]);
     const { currentUser } = useMainContext();
 
-    // get users ads from db
+    // get users ads from db.
     useEffect(() => {
         const unsubscribe = db.collection("ads")
             // only add ads from current user
