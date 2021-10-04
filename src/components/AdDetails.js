@@ -32,7 +32,7 @@ export default function AdDetails() {
 
     // get email from db
     useEffect(() => {
-        db.collection("ads")
+        const unsubscribe = db.collection("ads")
             // only add ads from current user
             .where("id", "==", id)
             .onSnapshot(querySnapshot => {
@@ -43,6 +43,7 @@ export default function AdDetails() {
                 setEmail(items[0].authorEmail)
                 setName(items[0].authorName)
             })
+        return () => unsubscribe();
     }, []);
 
     // get ads

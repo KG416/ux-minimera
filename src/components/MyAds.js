@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useUserAds from './hooks/useUserAds';
+import useUserAds from '../hooks/useUserAds';
 
 // temp styling
 const StyledDiv = styled.div`

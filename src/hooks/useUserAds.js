@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useMainContext } from '../../context/MainContext';
-import { db } from '../../firebase';
+import { useMainContext } from '../context/MainContext';
+import { db } from '../firebase';
 
 const useUserAds = () => {
     const [loading, setLoading] = useState(true);

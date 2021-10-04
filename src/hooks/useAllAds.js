@@ -1,3 +1,5 @@
+/* NOT IN USE ATM */
+
 import { useState, useEffect } from 'react';
 import { useMainContext } from '../../context/MainContext';
 import { db } from '../../firebase';

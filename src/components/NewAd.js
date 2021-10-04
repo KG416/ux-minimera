@@ -48,8 +48,6 @@ const TempSection = styled.section`
 export default function NewAd() {
     const adTitleRef = useRef();
     const adDetailsRef = useRef();
-    /* const [area, setArea] = useState();
-    const [name, setName] = useState(); */
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const { currentUser } = useMainContext();
@@ -59,7 +57,7 @@ export default function NewAd() {
 
 
     // new add
-    async function handleSubmit(e) {
+    const handleSubmit = async e => {
         e.preventDefault();
 
         try {
@@ -96,7 +94,6 @@ export default function NewAd() {
                     adTitle: adTitleRef.current.value,
                     adDetails: adDetailsRef.current.value,
                 })
-
             setLoading(false);
             //alert('Annons tillagd!')
             history.push("/myads");
