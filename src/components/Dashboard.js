@@ -4,14 +4,59 @@ import useAllAds from '../hooks/useAllAds';
 
 // temp styling
 const StyledDiv = styled.div`
+    h1 {
+        margin: 10px 0 0;
+    }
+    .area {
+        font-size: 16px;
+        text-align: center;
+
+        span {
+            font-weight: bold;
+        }
+    }
+    .adsContainer {
+        border: 2px green solid;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin: 30px 0 30px;
+
+    }
     .adCard {
+        font-family: 'Roboto', sans-serif;
+        min-height: 150px;
         cursor: pointer;
         border: 2px solid red;
         margin: 5px;
-        padding: 5px;
+        padding: 1px;
+        
         &:hover {
         background: lightgray;
-    }
+        }
+
+        & h2 {
+            text-align: left;
+            color: darkgreen;
+            margin: 0 0 10px;
+            width: 100%;
+        }
+
+        & p {
+          
+        }
+
+        a {
+            height: 100%;
+            padding: 2px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .author {
+            color: darkred;
+            font-style: italic;
+        }
     }
 `;
 
@@ -76,26 +121,26 @@ export default function Dashboard() {
 
     return (
         <StyledDiv>
-            {/* <div>useAllAds TEST</div> */}
             <h1>Annonser</h1>
-            <p>Vald stadsdel:</p>
-            <h2>{currentAreaInSwedish}</h2>
+            <p className="area">Vald stadsdel: <span>{currentAreaInSwedish}</span> </p>
             {loading && <p>Loading...</p>}
 
-            {!loading && !ads.length > 0 &&
-                <p> Inga annonser att visa för denna stadsdel. Efter annonser skapats visas de här.</p>}
+            <div className="adsContainer">
+                {!loading && !ads.length > 0 &&
+                    <p> Inga annonser att visa för denna stadsdel. Efter annonser skapats visas de här.</p>}
 
-            {ads.length > 0 &&
-                ads.map(ad => (
-                    <div key={ad.id} className="adCard">
-                        <Link to={`/addetails/${ad.id}`}>
-                            <h2>{ad.adTitle}</h2>
-                            <p>{ad.adDetails}</p>
-                            <p>Annonsör: {ad.authorName}</p>
-                        </Link>
-                    </div>
-                ))
-            }
+                {ads.length > 0 &&
+                    ads.map(ad => (
+                        <div key={ad.id} className="adCard">
+                            <Link to={`/addetails/${ad.id}`}>
+                                <h2>{ad.adTitle}</h2>
+                                <p>{ad.adDetails}</p>
+                                <p className="author">Annonsör: {ad.authorName}</p>
+                            </Link>
+                        </div>
+                    ))
+                }
+            </div>
         </StyledDiv>
     )
 }

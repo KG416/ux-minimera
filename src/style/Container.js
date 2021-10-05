@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 
 const StyledContainer = styled.div`
-    border: 2px solid blue;
+    outline: 2px solid blue;
     max-width: 1200px;
     height: 100%;
     margin: 0 auto;
-    padding-right: 3.5%;
-    padding-left: 3.5%;
+    padding-right: 1.5%;
+    padding-left: 1.5%;
 
     /* Hard coded quick fix */
     @media (min-width: 700px) {

@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-
-* {
-    font-family: "Quicksand";
-    font-weight: 500;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belleza&display=swap');
 
 body {
+  font-family: 'Belleza', sans-serif;
+  font-weight: 400;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

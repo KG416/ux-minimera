@@ -13,38 +13,50 @@ export const GlobalStyles = createGlobalStyle`
         outline: none;
     }
 }
-html {
+html, body {
     background-color: white;
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 html, h1, h2 {
     transition: background-color 0.5s ease-in-out;
 }
 h1 {
-    font-size: 3em;
-    color: black;
     text-align: center;
-    max-width: 100vw;
-}
-h3 {
-    font-size: 1.6em;
-    color: black;
-    /* margin: 50px; */
-    text-align: center;
-}
-
-/* Medium */
-
-
-/* Mobile */
-@media (max-width: 760px) {
-h1 {
     font-size: 2.6em;
+    margin: 15px;
+}
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
 }
 h3 {
-    font-size: 1.6em;
+    font-size: 14px;
+    text-align: center;
     /* margin: 50px; */
 }
+p {
+    font-size: 12px;
+}
+/* Desktop view */
+
+@media (min-width: 760px) {
+    h1 {
+        font-size: 3em;
+        max-width: 100vw;
+    }
+
+    h2 {
+        font-size: 16px;
+        max-width: 100vw;
+    }
+
+    h3 {
+        font-size: 14px;
+        max-width: 100vw;
+    }
 }
 
 `;

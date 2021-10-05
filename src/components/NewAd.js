@@ -10,20 +10,39 @@ const TempSection = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
     form {
+    font-family: 'Roboto';
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    input {
-        padding: 10px;
-        border: 1px solid black;
+
+    label {
+        font-size: 12px;
+        padding: 0 6px 0;
+        margin-left: 5px;
+        position: relative;
+        top: 8px;
+        background-color: white;
     }
-    .ad-details {
-        text-align: start;
-        height: 100px;
-        border: 1px solid black;
-        padding: 10px;
+    input {
+        z-index: 8;
+        border: 1px solid grey;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 260px;
+        padding: 16px;
+    }
+    textarea {
+        border: 1px solid grey;
+        border-radius: 5px;
+        font-family: 'Roboto';
+        font-size: 16px;
+        width: 260px;
+        text-align: bottom;
+        height: 150px;
+        padding: 16px;
     }
     & > * {
         margin: 10px;
@@ -107,20 +126,22 @@ export default function NewAd() {
         <>
             <TempSection>
                 <h1>Ny annons</h1>
-
                 <form onSubmit={handleSubmit}>
                     <div>
+                        <label>Vad vill du låna ut?</label>
                         <input
                             type="text"
-                            placeholder="Vad vill du låna ut?"
+                            placeholder="Titel"
+                            maxLength="30"
                             ref={adTitleRef}
                             required
                         />
                     </div>
                     <div>
-                        <input className="ad-details"
+                        <label>Detaljer</label>
+                        <textarea
                             type="textarea"
-                            placeholder="Detaljer"
+                            placeholder="Beskriv ditt objekt"
                             ref={adDetailsRef}
                             required
                         />
