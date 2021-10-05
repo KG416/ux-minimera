@@ -1,3 +1,4 @@
+export const START_PAGE = "/startpage";
 export const SIGN_UP = "/signup";
 export const LOG_IN = "/login";
 export const PROFILE = "/profile";

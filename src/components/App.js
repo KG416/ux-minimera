@@ -14,6 +14,7 @@ import { GlobalStyles } from '../style/mainStyles';
 import StyledContainer from '../style/Container';
 import NewAd from './NewAd';
 import AdDetails from './AdDetails';
+import StartPage from './StartPage';
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
       <MainContextProvider>
         <StyledContainer>
           <Switch>
+            <Route path={ROUTES.START_PAGE} component={StartPage} />
             <Route path={ROUTES.SIGN_UP} component={Signup} />
             <Route path={ROUTES.LOG_IN} component={Login} />
             <PrivateRoute exact path="/" component={Dashboard} />
