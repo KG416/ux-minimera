@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { useMainContext } from '../context/MainContext';
-import { db } from '../firebase';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import useAllAds from '../hooks/useAllAds';
 
 // temp styling
 const StyledDiv = styled.div`
@@ -18,7 +16,7 @@ const StyledDiv = styled.div`
 `;
 
 export default function Dashboard() {
-    const [currentArea, setCurrentArea] = useState("");
+    /* const [currentArea, setCurrentArea] = useState("");
     const [currentAreaInSwedish, setCurrentAreaInSwedish] = useState("");
     const { currentUser } = useMainContext();
     const [ads, setAds] = useState([]);
@@ -72,10 +70,13 @@ export default function Dashboard() {
                 setLoading(false)
             })
         return () => unsubscribe();
-    }, [currentArea])
+    }, [currentArea]) */
+
+    const { loading, ads, currentAreaInSwedish } = useAllAds();
 
     return (
         <StyledDiv>
+            {/* <div>useAllAds TEST</div> */}
             <h1>Annonser</h1>
             <p>Vald stadsdel:</p>
             <h2>{currentAreaInSwedish}</h2>
