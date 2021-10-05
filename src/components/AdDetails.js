@@ -48,17 +48,20 @@ export default function AdDetails() {
 
     // get ads
     useEffect(() => {
-        setLoading(true)
-        adsInFb
-            .where("id", "==", id)
-            .onSnapshot(querySnapshot => {
-                const items = []
-                querySnapshot.forEach(doc => {
-                    items.push(doc.data())
+        setLoading(true);
+
+        const unsubscribe =
+            adsInFb
+                .where("id", "==", id)
+                .onSnapshot(querySnapshot => {
+                    const items = []
+                    querySnapshot.forEach(doc => {
+                        items.push(doc.data())
+                    })
+                    setAd(items)
+                    setLoading(false)
                 })
-                setAd(items)
-                setLoading(false)
-            })
+        return () => unsubscribe();
     }, [])
 
     const clickedOnContact = () => {

@@ -19,6 +19,7 @@ const TempSection = styled.section`
         border: 1px solid black;
     }
     select {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         border: 1px solid black;

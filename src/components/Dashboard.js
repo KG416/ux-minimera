@@ -28,7 +28,7 @@ export default function Dashboard() {
 
     // get area from firestore
     useEffect(() => {
-        db.collection("users")
+        const unsubscribe = db.collection("users")
             .doc(currentUser.uid)
             .collection("userInfo")
             .get()
@@ -52,13 +52,15 @@ export default function Dashboard() {
                 } else if (currentArea === 'east') {
                     setCurrentAreaInSwedish('Öster');
                 }
+
+                return () => unsubscribe();
             });
     }, [currentUser.uid, currentArea]);
 
     // get ads
-    const getAllAds = () => {
+    useEffect(() => {
         setLoading(true)
-        adsInFb
+        const unsubscribe = adsInFb
             // only ads from current area
             .where("area", "==", currentArea)
             .onSnapshot(querySnapshot => {
@@ -69,10 +71,7 @@ export default function Dashboard() {
                 setAds(items)
                 setLoading(false)
             })
-    }
-
-    useEffect(() => {
-        getAllAds()
+        return () => unsubscribe();
     }, [currentArea])
 
     return (
