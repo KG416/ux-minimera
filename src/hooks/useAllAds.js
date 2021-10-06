@@ -11,29 +11,30 @@ const useAllAds = () => {
 
     // get area from db. Don't know why I can't make CleanUp func here.
     useEffect(() => {
-       /*  const unsubscribe =  */db.collection("users")
+        /* const unsubscribe =  */db.collection("users")
             .doc(currentUser.uid)
             .collection("userInfo")
             .get()
-            // This is async, so it returns a promise
             .then((snapshot) => {
-                let documents = [];
-                snapshot.docs.forEach((doc) => {
-                    documents.push(doc.data());
-                });
-                setCurrentArea(documents[0].area)
+                setCurrentArea(snapshot.docs[0].data().area)
 
                 // translate area to swedish for rendering
-                if (currentArea === 'south') {
-                    setCurrentAreaInSwedish('Söder');
-                } else if (currentArea === 'center') {
-                    setCurrentAreaInSwedish('Centrum');
-                } else if (currentArea === 'north') {
-                    setCurrentAreaInSwedish('Norr');
-                } else if (currentArea === 'west') {
-                    setCurrentAreaInSwedish('Väster');
-                } else if (currentArea === 'east') {
-                    setCurrentAreaInSwedish('Öster');
+                switch (currentArea) {
+                    case 'center':
+                        setCurrentAreaInSwedish('Centrum');
+                        break;
+                    case 'south':
+                        setCurrentAreaInSwedish('Söder');
+                        break;
+                    case 'north':
+                        setCurrentAreaInSwedish('Norr');
+                        break;
+                    case 'west':
+                        setCurrentAreaInSwedish('Väster');
+                        break;
+                    case 'east':
+                        setCurrentAreaInSwedish('Öster');
+                        break;
                 }
             });
         /* return () => unsubscribe(); */
