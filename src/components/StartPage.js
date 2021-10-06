@@ -1,61 +1,80 @@
 import React from 'react'
-import { StyledButton } from '../style/mainStyles'
+import { SecondaryBtn } from '../style/mainStyles'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import { colors } from '../style/Colors';
 
-const TempSection = styled.section`
+const StartPageSection = styled.section`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    input {
-        padding: 10px;
-        border: 1px solid black;
+    justify-content: space-around;
+    height: 100vh;
+    width: 100vw;
+    padding: 5px;
+
+    color: ${colors.color1};
+    background-color:${colors.bg1};
+   
+    h1 {
+        font-size: 70px;
+        /* margin-top: 10vh; */
     }
-    select {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid black;
-        padding: 10px;
-    }
-    & > * {
-        margin: 10px;
-        padding: 10px;
-    }
+    h3 {
+        font-size: 18px;
+        /* margin-bottom: 10vh;  */
     }
     span {
         text-decoration: underline;
         font-weight: bold;
     }
-    button {
-        cursor: pointer;
+    .btn-wrap-link {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    a {
-        color: black;
+    .sign-up-btn {
+        width: 100%;
+        margin: 70px 70px 10px;
+    }
+    p {    
+        color: ${colors.color1};
+        font-size: 14px;
+        text-align: center;
+        margin-left: 80px;
+        margin-bottom: 10px;
     }
     .error {
         color: red;
+    }
+
+    @media (min-width: 760px) {
+        height: 10%;
+        width: 100%;
+        border-radius: 5px;
+        
     }
 `;
 
 export default function StartPage() {
     return (<>
-        <TempSection>
+        <StartPageSection>
 
-            <h1>Minimera</h1>
-            <h3>Låna saker av folk i din närhet istället för att köpa</h3>
+            <div>
+                <h1>minimera</h1>
+                <h3>Låna saker av folk i din närhet istället för att köpa</h3>
+            </div>
 
-            <Link to="/signup">
-                <StyledButton>Bli medlem</StyledButton>
-            </Link>
+            <div>
+                <Link to="/signup" className="btn-wrap-link">
+                    <SecondaryBtn className="sign-up-btn">BLI MEDLEM</SecondaryBtn>
+                </Link>
 
-            <Link to="/login">Är du redan medlem? <span>Logga in</span></Link>
+                <Link to="/login">
+                    <p>Är du redan medlem? <span>Logga in</span></p>
+                </Link>
+            </div>
 
-        </TempSection>
+        </StartPageSection>
     </>)
 }

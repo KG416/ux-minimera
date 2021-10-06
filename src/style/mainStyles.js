@@ -1,4 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components/macro';
+import { colors } from './Colors';
+
 
 /* ========================= Global Styles =========================*/
 export const GlobalStyles = createGlobalStyle`
@@ -62,12 +64,32 @@ p {
 `;
 
 /* ========================= Buttons =========================*/
-export const StyledButton = styled.button`
-    background-color: transparent;
-    font-size: 30px;
+export const PrimaryBtn = styled.button`
+    background-color: ${colors.bg1};
+    color: ${colors.color1};
+
+    border-radius: 3px;
+    font-size: 20px;
+    /* font-weight: 600; */
+    /* letter-spacing: 1.25px; */
     margin: 50px;
     height: 60px;
-    width: 80%;
+    max-width: 300px;
+    width: 85%;
     cursor: pointer;
-    border: 5px red solid;
+`;
+
+export const SecondaryBtn = styled.button`
+    background-color: ${colors.bg2};
+    color: ${colors.bg1};
+
+    border-radius: 3px;
+    font-size: 20px;
+    /* font-weight: 600; */
+    /* letter-spacing: 1.25px; */
+    margin: 50px;
+    height: 60px;
+    max-width: 300px;
+    width: 85%;
+    cursor: pointer;
 `;

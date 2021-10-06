@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import { useMainContext } from '../context/MainContext';
 import styled from 'styled-components';
-import { StyledButton } from '../style/mainStyles';
+import { PrimaryBtn } from '../style/mainStyles';
 
 const TempSection = styled.section`
     display: flex;
@@ -51,8 +51,8 @@ export default function Profile() {
 
                 <p>user-id: <br /> {currentUser.uid}</p>
 
-                <StyledButton onClick={toAdds}>Mina annonser</StyledButton>
-                <StyledButton onClick={handleLogout}>LOGGA UT</StyledButton>
+                <PrimaryBtn onClick={toAdds}>MINA ANNONSER</PrimaryBtn>
+                <PrimaryBtn onClick={handleLogout}>LOGGA UT</PrimaryBtn>
                 {error && <div>{error}</div>}
             </TempSection>
         </>

@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { db } from '../firebase';
 import { v4 as uuid } from 'uuid'
 import { useHistory } from 'react-router';
+import { PrimaryBtn } from '../style/mainStyles';
 
-const TempSection = styled.section`
+const NewAdSection = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +19,18 @@ const TempSection = styled.section`
     justify-content: center;
     align-items: center;
 
+    div {
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    }
+
+    .label-wrap {
+        display: inline-block;
+    }
+
     label {
+        display: inline-block;
         font-size: 12px;
         padding: 0 6px 0;
         margin-left: 5px;
@@ -27,11 +39,10 @@ const TempSection = styled.section`
         background-color: white;
     }
     input {
-        z-index: 8;
         border: 1px solid grey;
         border-radius: 5px;
         font-size: 16px;
-        width: 260px;
+        width: 80vw;
         padding: 16px;
     }
     textarea {
@@ -39,9 +50,9 @@ const TempSection = styled.section`
         border-radius: 5px;
         font-family: 'Roboto';
         font-size: 16px;
-        width: 260px;
+        width: 80vw;
+        height: 28vh;
         text-align: bottom;
-        height: 150px;
         padding: 16px;
     }
     & > * {
@@ -61,6 +72,14 @@ const TempSection = styled.section`
     }
     .error {
         color: red;
+    }
+    @media (min-width: 760px) {
+        input {
+        max-width: 40vw;
+        }
+        textarea {
+        max-width: 40vw;
+        }
     }
 `;
 
@@ -124,11 +143,13 @@ export default function NewAd() {
 
     return (
         <>
-            <TempSection>
+            <NewAdSection>
                 <h1>Ny annons</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label>Vad vill du låna ut?</label>
+                        <div className="label-wrap">
+                            <label>Vad vill du låna ut?</label>
+                        </div>
                         <input
                             type="text"
                             placeholder="Titel"
@@ -138,7 +159,9 @@ export default function NewAd() {
                         />
                     </div>
                     <div>
-                        <label>Detaljer</label>
+                        <div className="label-wrap">
+                            <label>Detaljer</label>
+                        </div>
                         <textarea
                             type="textarea"
                             placeholder="Beskriv ditt objekt"
@@ -147,12 +170,12 @@ export default function NewAd() {
                         />
                     </div>
 
-                    <button disabled={loading} type="submit">
-                        Lägg till annons
-                    </button>
+                    <PrimaryBtn disabled={loading} type="submit">
+                        LÄGG TILL ANNONS
+                    </PrimaryBtn>
                 </form>
                 {error && <div className="error">{error}</div>}
-            </TempSection>
+            </NewAdSection>
         </>
     )
 }

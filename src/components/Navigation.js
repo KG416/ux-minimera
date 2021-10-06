@@ -10,6 +10,7 @@ import {
   faQuestion,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { colors } from "../style/Colors";
 
 const StyledNav = styled.nav`
     ul {
@@ -22,7 +23,7 @@ const StyledNav = styled.nav`
     width: 100%;
     display: flex;
     justify-content: space-around;
-    background-color: black;
+    background-color: ${colors.bg3};
   }
 
   .img-wrapper {
@@ -46,8 +47,9 @@ const StyledNav = styled.nav`
   }
 
   li a {
+    color: ${colors.color3};
+
     text-decoration: none;
-    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,8 +57,9 @@ const StyledNav = styled.nav`
   }
 
   li p {
+    color: ${colors.color3};
+
     text-align: center;
-    color: white;
     margin-top: 10px;
     font-size: 12px;
   }
@@ -69,6 +72,7 @@ const StyledNav = styled.nav`
 
   @media (min-width: 700px) {
     ul {
+      background-color: ${colors.bg1};
       top: 0;
       bottom: auto;
     }
@@ -80,17 +84,18 @@ const StyledNav = styled.nav`
 
     ul img {
     display: block;
-    height: 50px;
+    height: 60px;
     }
 
     li a {
-      outline: 1px solid white;
+      color: ${colors.color1};
       border-radius: 3px;
       padding: 8px;
       flex-direction: row;
     }
 
     li p {
+      color: ${colors.color1};
     font-size: 16px;
     margin: 0;
     padding:0;

@@ -1,7 +1,8 @@
 import styled from 'styled-components/macro';
 
 const StyledContainer = styled.div`
-    outline: 2px solid blue;
+    /* outline: 2px solid blue; */
+    @media (min-width: 700px) {
     max-width: 1200px;
     height: 100%;
     margin: 0 auto;
@@ -9,7 +10,6 @@ const StyledContainer = styled.div`
     padding-left: 1.5%;
 
     /* Hard coded quick fix */
-    @media (min-width: 700px) {
     margin-top: 97px;
 }
 
