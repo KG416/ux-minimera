@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 const StyledContainer = styled.div`
-    /* outline: 2px solid blue; */
+    outline: 2px solid blue;
     @media (min-width: 700px) {
     max-width: 1200px;
     height: 100%;

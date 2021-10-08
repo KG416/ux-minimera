@@ -5,6 +5,8 @@ body {
   font-family: 'Belleza', sans-serif;
   font-weight: 400;
   
+  height: 100vh;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

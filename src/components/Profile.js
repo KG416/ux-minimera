@@ -8,11 +8,25 @@ import { colors } from '../style/Colors';
 
 const ProfileSection = styled.section`
 
+    outline: 2px red solid;
+
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    
+  
+    h2 {
+        font-size: medium;
+    }
+
+    p {
+        color: ${colors.color3};
+        font-size: small;
+        margin: 0 0 2px;
+    }
+
     .info-card-wrap {
+        font-family: Roboto;
         border-radius: 3px;
         padding: 10px 0 10px;
         box-shadow: 5px 5px 15px 5px rgba(163,163,163,0.5);
@@ -26,22 +40,19 @@ const ProfileSection = styled.section`
 
         margin: 5px;
         padding: 5px;
-        width: 70vw;
-        max-width: 300px;
+        width: 76vw;
+        max-width: 290px;
+    }
 
-        p {
-            color: ${colors.color3};
-            font-size: medium;
-            margin: 0 0 2px; 
-        }
-
-        h2 {
-            font-size: x-large;
-        }
+    .btn-wrap {
+        text-align: center;
     }
 
     /* iPhone 5, 6, 7, 8 */
     @media (max-width: 375px) {
+
+        height: 90vh;
+
         button {
             margin: 20px;
         }
@@ -51,7 +62,7 @@ const ProfileSection = styled.section`
 
 export default function Profile() {
     const [error, setError] = useState("");
-    const { logout, currentUser } = useMainContext();
+    const { logout } = useMainContext();
     const history = useHistory();
     const { name, area, email } = useUserInfo();
 
@@ -95,8 +106,10 @@ export default function Profile() {
 
                 {error && <div>{error}</div>}
 
-                <PrimaryBtn onClick={toAdds}>MINA ANNONSER</PrimaryBtn>
-                <PrimaryBtn onClick={handleLogout}>LOGGA UT</PrimaryBtn>
+                <div className="btn-wrap">
+                    <PrimaryBtn onClick={toAdds}>MINA ANNONSER</PrimaryBtn>
+                    <PrimaryBtn onClick={handleLogout}>LOGGA UT</PrimaryBtn>
+                </div>
             </ProfileSection>
         </>
     )

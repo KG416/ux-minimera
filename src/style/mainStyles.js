@@ -1,7 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components/macro';
 import { colors } from './Colors';
 
-
 /* ========================= Global Styles =========================*/
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -92,4 +91,114 @@ export const SecondaryBtn = styled.button`
     max-width: 300px;
     width: 85%;
     cursor: pointer;
+`;
+
+/* ========================= Sections =========================*/
+export const AdsSection = styled.section`
+    h1 {
+        margin: 10px 0 0;
+    }
+    .area {
+        font-size: 16px;
+        text-align: center;
+
+        span {
+            font-weight: bold;
+        }
+    }
+    .adsContainer {
+        outline: 2px green solid;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin: 30px 0 30px;
+
+    }
+    .adCard {
+        font-family: 'Roboto', sans-serif;
+        cursor: pointer;
+        outline: 2px solid red;
+        margin: 5px;
+        padding: 1px;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+        background: lightgray;
+        }
+
+        .top-row {
+            /* outline: 2px solid green; */
+            width: 100%;
+            display: grid;
+            grid-template-columns: 95% 5%;
+        }
+
+        h2 {
+            outline: 2px solid black;
+            text-align: left;
+            color: darkgreen;
+            margin: 0 0 5px;
+        }
+
+        .deleteBtn {
+            font-size: 18px;
+            cursor: pointer;
+            background: transparent;
+            &:hover {
+                color: grey;
+            }
+        }
+
+        .details {
+            outline: 2px solid blue;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 8; /* number of lines to show */
+            -webkit-box-orient: vertical;
+            margin-bottom: 5px;
+        }
+
+        /*
+        a = Dashboard.js 
+        .innerAdContainer = MyAds.js
+        */
+        a, .innerAdContainer {
+            /* outline: 2px turquoise solid; */
+            height: 20vh;
+            width: 20vh;
+            padding: 2px;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        .author {
+            color: darkred;
+            font-weight: bold;
+            font-style: italic;
+        }
+    }
+
+    /* iPhone 5 */
+    @media (max-width: 320px) {
+        /* background: red; */
+        .details {
+            height: 42px;
+        }
+    }
+
+    /* Desktop view */
+    @media (min-width: 700px) {
+        .adsContainer {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .adCard {
+            height: 200px;
+            width: 200px;
+        }
+    }
+
 `;

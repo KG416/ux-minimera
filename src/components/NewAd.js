@@ -9,9 +9,10 @@ import { PrimaryBtn } from '../style/mainStyles';
 const NewAdSection = styled.section`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    
+    height: 90vh;
+
     form {
     font-family: 'Roboto';
     display: flex;
@@ -20,14 +21,14 @@ const NewAdSection = styled.section`
     align-items: center;
 
     div {
-    /* background-color: blue; */
-    display: flex;
-    flex-direction: column;
-    }
+        /* background-color: blue; */
+        display: flex;
+        flex-direction: column;
+        }
 
     .label-wrap {
         display: inline-block;
-    }
+        }
 
     label {
         display: inline-block;
@@ -37,14 +38,16 @@ const NewAdSection = styled.section`
         position: relative;
         top: 8px;
         background-color: white;
-    }
+        }
+
     input {
         border: 1px solid grey;
         border-radius: 5px;
         font-size: 16px;
         width: 80vw;
         padding: 16px;
-    }
+        }
+
     textarea {
         border: 1px solid grey;
         border-radius: 5px;
@@ -54,31 +57,35 @@ const NewAdSection = styled.section`
         height: 28vh;
         text-align: bottom;
         padding: 16px;
+        }
     }
-    & > * {
-        margin: 10px;
-        padding: 10px;
-    }
-    }
+    
     span {
         text-decoration: underline;
         font-weight: bold;
     }
+
     button {
         cursor: pointer;
     }
+
     a {
         color: black;
     }
+
     .error {
         color: red;
     }
-    @media (min-width: 760px) {
+
+    /* Desktop view */
+    @media (min-width: 700px) {
+        height: 100%;
+
         input {
-        max-width: 40vw;
+        max-width: 35vw;
         }
         textarea {
-        max-width: 40vw;
+        max-width: 35vw;
         }
     }
 `;
@@ -170,9 +177,11 @@ export default function NewAd() {
                         />
                     </div>
 
+
                     <PrimaryBtn disabled={loading} type="submit">
                         LÄGG TILL ANNONS
                     </PrimaryBtn>
+
                 </form>
                 {error && <div className="error">{error}</div>}
             </NewAdSection>

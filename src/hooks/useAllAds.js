@@ -44,7 +44,6 @@ const useAllAds = () => {
     useEffect(() => {
         setLoading(true)
         const unsubscribe = db.collection("ads")
-            // only ads from current area
             .where("area", "==", currentArea)
             .onSnapshot(querySnapshot => {
                 const items = []
