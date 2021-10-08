@@ -76,11 +76,10 @@ export const PrimaryBtn = styled.button`
     max-width: 300px;
     width: 85%;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
 
     &:hover {
         box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
-        max-width: 310px;
     }
 `;
 

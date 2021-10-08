@@ -2,22 +2,28 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { db } from '../firebase'
 import styled from 'styled-components'
+import { colors } from '../style/Colors';
+import { PrimaryBtn } from '../style/mainStyles';
 
 // temp styling
-const StyledDiv = styled.div`
-    .adCard {
-        border: 2px solid red;
-        margin: 5px;
-        padding: 5px;
+const DetailsSection = styled.section`
+    .detailsContainer {
+        /* outline: 1px solid green; */
+        
     }
-    button {
-        cursor: pointer;
-        padding: 3px;
-        margin: 3px;
-        width: 80px;
-        &:hover {
-        border: 1px solid black;
-        }
+    .adCard {
+        background-color: ${colors.bg2};
+        box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
+
+        font-family: 'Roboto', sans-serif;
+        border-radius: 1px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+
+        height: 60vh;
+        width: 90%;
+        padding: 8px;
     }
 `;
 
@@ -69,24 +75,26 @@ export default function AdDetails() {
     }
 
     return (
-        <StyledDiv>
-            {loading && <p>Loading...</p>}
+        <div className="detailsContainer">
+            <DetailsSection>
+                {loading && <p>Loading...</p>}
 
-            {ad && ad.map(ad => (
-                <div key={ad.id} className="adCard">
-                    <h1>{ad.adTitle}</h1>
-                    <p>{ad.adDetails}</p>
-                    <p>Annonsör: {name}</p>
+                {ad && ad.map(ad => (
+                    <div key={ad.id} className="adCard">
+                        <h1>{ad.adTitle}</h1>
+                        <p>{ad.adDetails}</p>
+                        <p>Annonsör: {name}</p>
 
-                    {/* display mailto link if btn is clicked */}
-                    {contactClicked ?
-                        <a href={`mailto:${email}`}>{email}</a>
-                        :
-                        <button onClick={clickedOnContact}>Kontakta annonsör</button>
-                    }
-                </div>
-            ))
-            }
-        </StyledDiv >
+                        {/* display mailto link if btn is clicked */}
+                        {contactClicked ?
+                            <a href={`mailto:${email}`}>{email}</a>
+                            :
+                            <PrimaryBtn onClick={clickedOnContact}>Kontakta annonsör</PrimaryBtn>
+                        }
+                    </div>
+                ))
+                }
+            </DetailsSection >
+        </div>
     )
 }
