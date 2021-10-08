@@ -17,13 +17,11 @@ export default function Dashboard() {
 
                 {ads.length > 0 &&
                     ads.map(ad => (
-                        <div key={ad.id} className="adCard">
-                            <Link to={`/addetails/${ad.id}`}>
-                                <h2>{ad.adTitle}</h2>
-                                <p className="details">{ad.adDetails}</p>
-                                <p className="author">Annonsör: {ad.authorName}</p>
-                            </Link>
-                        </div>
+                        <Link to={`/addetails/${ad.id}`} key={ad.id} className="adCard">
+                            <h2>{ad.adTitle}</h2>
+                            <p className="details">{ad.adDetails}</p>
+                            <p className="author">Annonsör: {ad.authorName}</p>
+                        </Link>
                     ))
                 }
             </div>

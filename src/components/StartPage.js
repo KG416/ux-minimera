@@ -39,6 +39,7 @@ const StartPageSection = styled.section`
     }
     p {    
         color: ${colors.color1};
+        font-family: Roboto;
         font-size: 14px;
         text-align: center;
         margin-left: 80px;

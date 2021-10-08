@@ -21,17 +21,15 @@ export default function MyAds() {
                 {ads.length > 0 &&
                     ads.map(ad => (
                         <div key={ad.id} className="adCard">
-                            <div className="innerAdContainer">
-                                <div className="top-row">
-                                    <h2>{ad.adTitle}</h2>
-                                    <button className="deleteBtn">
-                                        <FontAwesomeIcon icon={faTrash}
-                                            onClick={() => deleteAd(ad)}
-                                        />
-                                    </button>
-                                </div>
-                                <p className="details">{ad.adDetails}</p>
+                            <div className="top-row">
+                                <h2>{ad.adTitle}</h2>
+                                <button className="deleteBtn">
+                                    <FontAwesomeIcon icon={faTrash}
+                                        onClick={() => deleteAd(ad)}
+                                    />
+                                </button>
                             </div>
+                            <p className="details">{ad.adDetails}</p>
                         </div>
                     ))
                 }

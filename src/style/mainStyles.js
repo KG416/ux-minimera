@@ -76,6 +76,12 @@ export const PrimaryBtn = styled.button`
     max-width: 300px;
     width: 85%;
     cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
+        max-width: 310px;
+    }
 `;
 
 export const SecondaryBtn = styled.button`
@@ -95,6 +101,7 @@ export const SecondaryBtn = styled.button`
 
 /* ========================= Sections =========================*/
 export const AdsSection = styled.section`
+
     h1 {
         margin: 10px 0 0;
     }
@@ -107,74 +114,87 @@ export const AdsSection = styled.section`
         }
     }
     .adsContainer {
-        outline: 2px green solid;
-        display: grid;
-        grid-template-columns: 50% 50%;
+        /* outline: 2px green solid; */
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
         margin: 30px 0 30px;
 
     }
     .adCard {
+        /* outline: 2px solid brown; */
+        background-color: ${colors.bg2};
+        box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
+
         font-family: 'Roboto', sans-serif;
         cursor: pointer;
-        outline: 2px solid red;
+        border-radius: 1px;
         margin: 5px;
-        padding: 1px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
 
+        height: 21vh;
+        width: 21vh;
+        padding: 8px;
+        
         &:hover {
-        background: lightgray;
+        box-shadow: 1px 1px 1px 1px rgba(163,163,163,1);
         }
 
         .top-row {
+            flex-grow: 200;
             /* outline: 2px solid green; */
             width: 100%;
             display: grid;
-            grid-template-columns: 95% 5%;
+            grid-template-columns: 90% 10%;
         }
 
         h2 {
-            outline: 2px solid black;
+            /* outline: 2px solid black; */
+            color: ${colors.color2};
+
             text-align: left;
-            color: darkgreen;
-            margin: 0 0 5px;
+            margin: 0 0 10px;
+
+            width: 95%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
         .deleteBtn {
-            font-size: 18px;
+            /* outline: 2px solid black; */
+            display: flex;
+            justify-self: center;
+            font-size: 16px;
             cursor: pointer;
             background: transparent;
+            height: 16px;
             &:hover {
                 color: grey;
             }
         }
 
         .details {
-            outline: 2px solid blue;
+            /* outline: 2px solid blue; */
+            color: ${colors.color2};
+
+            flex-grow: 200;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 8; /* number of lines to show */
+            -webkit-line-clamp: 7; /* number of lines to show */
             -webkit-box-orient: vertical;
             margin-bottom: 5px;
-        }
-
-        /*
-        a = Dashboard.js 
-        .innerAdContainer = MyAds.js
-        */
-        a, .innerAdContainer {
-            /* outline: 2px turquoise solid; */
-            height: 20vh;
-            width: 20vh;
-            padding: 2px;
-            display: flex;
-            flex-direction: column;
-            
+            /* height: 67%; */
         }
 
         .author {
-            color: darkred;
+            color: ${colors.color2};
+            
+
+            flex-grow: 1;
+            margin-top: 10px;
             font-weight: bold;
             font-style: italic;
         }
@@ -182,19 +202,16 @@ export const AdsSection = styled.section`
 
     /* iPhone 5 */
     @media (max-width: 320px) {
-        /* background: red; */
         .details {
             height: 42px;
+        }
+        .adsContainer {
+            margin-bottom: 15vh;
         }
     }
 
     /* Desktop view */
     @media (min-width: 700px) {
-        .adsContainer {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
         .adCard {
             height: 200px;
             width: 200px;

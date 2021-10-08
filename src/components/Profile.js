@@ -8,7 +8,7 @@ import { colors } from '../style/Colors';
 
 const ProfileSection = styled.section`
 
-    outline: 2px red solid;
+    /* outline: 2px red solid; */
 
     display: flex;
     flex-direction: column;
