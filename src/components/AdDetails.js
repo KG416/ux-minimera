@@ -1,30 +1,95 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { db } from '../firebase'
 import styled from 'styled-components'
 import { colors } from '../style/Colors';
 import { PrimaryBtn } from '../style/mainStyles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-// temp styling
 const DetailsSection = styled.section`
-    .detailsContainer {
         /* outline: 1px solid green; */
-        
-    }
+        display: flex;
+        justify-content: center;
+    
     .adCard {
         background-color: ${colors.bg2};
         box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
 
-        font-family: 'Roboto', sans-serif;
-        border-radius: 1px;
-        margin: 5px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
 
-        height: 60vh;
+        font-family: 'Roboto', sans-serif;
+        border-radius: 3px;
+        margin: 20px 5px;
+
+        height: 80vh;
         width: 90%;
-        padding: 8px;
+        padding: 20px;
     }
+
+    .adCard > * {
+        /* outline: 1px solid red; */
+    }
+
+    .topRow {
+            /* flex-grow: 200; */
+            width: 100%;
+            height: 5vh;
+            display: grid;
+            grid-template-columns: 85% 15%;
+            
+            h2 {
+                text-align: start;
+                font-size: large;
+            }
+
+            .closeCard {
+                /* outline: 1px solid red; */
+                cursor: pointer;
+                font-size: 24px;
+                height: 30px;
+                background: transparent;
+            }
+        }
+
+        .details {
+            font-size: small;
+            width: 100%;
+        }
+
+        .author {
+            font-weight: bold;
+            font-size: small;
+            width: 100%;
+        }
+
+        a {
+            background-color: ${colors.bg1};
+            color: ${colors.color1};
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 3px;
+            font-size: 20px;
+            /* font-weight: 600; */
+            /* letter-spacing: 1.25px; */
+            margin: 50px;
+            height: 60px;
+            max-width: 300px;
+            width: 85%;
+            cursor: pointer;
+            transition: 0.2s;
+
+            &:hover {
+                box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
+            }
+        }
+
 `;
 
 export default function AdDetails() {
@@ -35,6 +100,7 @@ export default function AdDetails() {
     const [contactClicked, setContactClicked] = useState(false)
     const [email, setEmail] = useState()
     const [name, setName] = useState()
+    const history = useHistory()
 
     // get email from db
     useEffect(() => {
@@ -74,27 +140,34 @@ export default function AdDetails() {
         setContactClicked(contactClicked => !contactClicked)
     }
 
+    const closeAd = () => {
+        history.push("/");
+    }
+
     return (
-        <div className="detailsContainer">
-            <DetailsSection>
-                {loading && <p>Loading...</p>}
+        <DetailsSection>
+            {loading && <p>Loading...</p>}
 
-                {ad && ad.map(ad => (
-                    <div key={ad.id} className="adCard">
-                        <h1>{ad.adTitle}</h1>
-                        <p>{ad.adDetails}</p>
-                        <p>Annonsör: {name}</p>
-
-                        {/* display mailto link if btn is clicked */}
-                        {contactClicked ?
-                            <a href={`mailto:${email}`}>{email}</a>
-                            :
-                            <PrimaryBtn onClick={clickedOnContact}>Kontakta annonsör</PrimaryBtn>
-                        }
+            {ad && ad.map(ad => (
+                <div key={ad.id} className="adCard">
+                    <div className="topRow">
+                        <h2>{ad.adTitle}</h2>
+                        <button className="closeCard" onClick={closeAd}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </button>
                     </div>
-                ))
-                }
-            </DetailsSection >
-        </div>
+                    <p className="details">{ad.adDetails}</p>
+                    <p className="author">Annonsör: {name}</p>
+
+                    {/* display mailto link if btn is clicked */}
+                    {contactClicked ?
+                        <a href={`mailto:${email}`}>{email}</a>
+                        :
+                        <PrimaryBtn onClick={clickedOnContact}>KONTAKTA ANNONSÖR</PrimaryBtn>
+                    }
+                </div>
+            ))
+            }
+        </DetailsSection >
     )
 }
