@@ -23,7 +23,7 @@ const DetailsSection = styled.section`
 
         font-family: 'Roboto', sans-serif;
         border-radius: 3px;
-        margin: 20px 5px;
+        margin: 20px 20px;
 
         height: 80vh;
         width: 90%;
@@ -31,11 +31,11 @@ const DetailsSection = styled.section`
     }
 
     .adCard > * {
-        /* outline: 1px solid red; */
+        /* outline: 5px red solid; */
     }
 
     .topRow {
-            /* flex-grow: 200; */
+            /* outline: 1px solid red; */
             width: 100%;
             height: 5vh;
             display: grid;
@@ -43,14 +43,18 @@ const DetailsSection = styled.section`
             
             h2 {
                 text-align: start;
+                /* display: flex;
+                align-self: center; */
                 font-size: large;
             }
 
             .closeCard {
                 /* outline: 1px solid red; */
+                display: flex;
+                align-self: flex-start;
+                justify-self: flex-end;
                 cursor: pointer;
                 font-size: 24px;
-                height: 30px;
                 background: transparent;
             }
         }
@@ -66,6 +70,7 @@ const DetailsSection = styled.section`
             width: 100%;
         }
 
+        /* When contact btn is clicked */
         a {
             background-color: ${colors.bg1};
             color: ${colors.color1};
@@ -89,7 +94,11 @@ const DetailsSection = styled.section`
                 box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
             }
         }
-
+        @media (min-width: 700px) {
+            .adCard {
+                padding: 50px;
+            }
+        }
 `;
 
 export default function AdDetails() {
