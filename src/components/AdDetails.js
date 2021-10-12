@@ -94,10 +94,22 @@ const DetailsSection = styled.section`
                 box-shadow: 1px 1px 1px 1px rgba(163,163,163,0.5);
             }
         }
-        @media (min-width: 700px) {
+        @media (min-width: 900px) {
             .adCard {
+                max-width: 50vw;
                 padding: 50px;
             }
+
+            .topRow h2 {
+                /* outline: red solid 1px; */
+                font-size: xx-large;
+            }
+    
+            .details, .author {
+                /* outline: red solid 1px; */
+                font-size: medium;
+            }
+
         }
 `;
 

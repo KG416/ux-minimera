@@ -1,36 +1,34 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import styled from "styled-components";
 import { useMainContext } from "../../context/MainContext";
-import styled from 'styled-components';
+import { FormSection, PrimaryBtn } from "../../style/mainStyles";
 
-const TempSection = styled.section`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & input {
-        padding: 10px;
-        border: 1px solid black;
+const InfoDiv = styled.div`
+    font-family: Roboto;
+
+    .toSignupWrap {
+        /* outline: 1px solid red; */
+
+        display: flex;
+        flex-direction: row;
+        justify-self: center;
+        align-items: center;
     }
-    & > * {
-        margin: 10px;
-        padding: 10px;
+
+    p {
+        font-size: 16px;
     }
-    }
-    span {
+
+    a {
         text-decoration: underline;
         font-weight: bold;
-    }
-    button {
         cursor: pointer;
+        margin: 5px;
     }
-    a {
-        color: black;
+
+    .error {
+        color: red;
     }
 `;
 
@@ -59,39 +57,50 @@ export default function Login() {
 
     return (
         <>
-            <TempSection>
+            <FormSection>
                 <h1>Logga in</h1>
                 {error && <div>{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div>
+                        <div className="label-wrap">
+                            <label>Mail</label>
+                        </div>
                         <input
                             type="email"
-                            placeholder="Mail"
+                            placeholder="Ange mailadress"
                             ref={emailRef}
                             required
                         />
                     </div>
+
                     <div>
+                        <div className="label-wrap">
+                            <label>Lösenord</label>
+                        </div>
                         <input
                             type="password"
-                            placeholder="Lösenord"
+                            placeholder="Ange lösenord"
                             ref={passwordRef}
                             required
                         />
                     </div>
-                    <span>
-                        <Link to="/forgot-password">Glömt lösenord?</Link>
-                    </span>
-                    <button disabled={loading} type="submit">
-                        Logga in
-                    </button>
 
-                    <div>
-                        Ej medlem?{" "}
-                        <Link to="/signup"><span>Bli medlem</span></Link>
-                    </div>
+                    <InfoDiv>
+                        <Link to="/forgot-password">Glömt lösenord?</Link>
+                    </InfoDiv>
+
+                    <PrimaryBtn disabled={loading} type="submit">
+                        LOGGA IN
+                    </PrimaryBtn>
+
+                    <InfoDiv>
+                        <div className="toSignupWrap">
+                            <p>Ej medlem?{" "}</p>
+                            <Link to="/signup">Bli medlem</Link>
+                        </div>
+                    </InfoDiv>
                 </form>
-            </TempSection>
+            </FormSection>
         </>
     );
 }
