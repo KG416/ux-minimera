@@ -218,3 +218,105 @@ export const AdsSection = styled.section`
     }
 
 `;
+
+export const FormSection = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 90vh;
+
+    form {
+    font-family: 'Roboto';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        /* background-color: blue; */
+        display: flex;
+        flex-direction: column;
+        }
+
+    .label-wrap {
+        display: inline-block;
+        }
+
+    label {
+        display: inline-block;
+        font-size: 12px;
+        padding: 0 6px 0;
+        margin-left: 5px;
+        position: relative;
+        top: 8px;
+        background-color: white;
+        }
+
+    input {
+        border: 1px solid grey;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 80vw;
+        padding: 16px;
+            &:focus {
+                outline: 2px solid ${colors.bg1};
+            }
+        }
+
+    textarea {
+        border: 1px solid grey;
+        border-radius: 5px;
+        font-family: 'Roboto';
+        font-size: 16px;
+        width: 80vw;
+        height: 28vh;
+        text-align: bottom;
+        padding: 16px;
+            &:focus {
+                outline: 2px solid ${colors.bg1};
+            }
+        }
+    }
+    
+    span {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+    button {
+        cursor: pointer;
+        &:focus {
+            color: ${colors.bg1};
+            background-color: ${colors.color1};
+            outline: 2px solid ${colors.bg1};
+            box-shadow: 5px 5px 15px 5px rgba(163,163,163,0.5);
+        }
+    }
+
+    a {
+        color: black;
+        &:focus {
+            color: ${colors.bg1};
+            background-color: ${colors.color1};
+            outline: 2px solid ${colors.bg1};
+            box-shadow: 5px 5px 15px 5px rgba(163,163,163,0.5);
+        }
+    }
+
+    .error {
+        color: red;
+    }
+
+    /* Desktop view */
+    @media (min-width: 700px) {
+        height: 100%;
+
+        input {
+        max-width: 35vw;
+        }
+        textarea {
+        max-width: 35vw;
+        }
+    }
+`;

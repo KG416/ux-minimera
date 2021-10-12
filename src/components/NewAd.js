@@ -1,94 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { useMainContext } from '../context/MainContext';
-import styled from 'styled-components';
 import { db } from '../firebase';
 import { v4 as uuid } from 'uuid'
 import { useHistory } from 'react-router';
-import { PrimaryBtn } from '../style/mainStyles';
-
-const NewAdSection = styled.section`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 90vh;
-
-    form {
-    font-family: 'Roboto';
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    div {
-        /* background-color: blue; */
-        display: flex;
-        flex-direction: column;
-        }
-
-    .label-wrap {
-        display: inline-block;
-        }
-
-    label {
-        display: inline-block;
-        font-size: 12px;
-        padding: 0 6px 0;
-        margin-left: 5px;
-        position: relative;
-        top: 8px;
-        background-color: white;
-        }
-
-    input {
-        border: 1px solid grey;
-        border-radius: 5px;
-        font-size: 16px;
-        width: 80vw;
-        padding: 16px;
-        }
-
-    textarea {
-        border: 1px solid grey;
-        border-radius: 5px;
-        font-family: 'Roboto';
-        font-size: 16px;
-        width: 80vw;
-        height: 28vh;
-        text-align: bottom;
-        padding: 16px;
-        }
-    }
-    
-    span {
-        text-decoration: underline;
-        font-weight: bold;
-    }
-
-    button {
-        cursor: pointer;
-    }
-
-    a {
-        color: black;
-    }
-
-    .error {
-        color: red;
-    }
-
-    /* Desktop view */
-    @media (min-width: 700px) {
-        height: 100%;
-
-        input {
-        max-width: 35vw;
-        }
-        textarea {
-        max-width: 35vw;
-        }
-    }
-`;
+import { PrimaryBtn, FormSection } from '../style/mainStyles';
 
 export default function NewAd() {
     const adTitleRef = useRef();
@@ -97,9 +12,6 @@ export default function NewAd() {
     const [loading, setLoading] = useState(false);
     const { currentUser } = useMainContext();
     const history = useHistory();
-
-    // get area & name from firestore
-
 
     // new add
     const handleSubmit = async e => {
@@ -150,7 +62,7 @@ export default function NewAd() {
 
     return (
         <>
-            <NewAdSection>
+            <FormSection>
                 <h1>Ny annons</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -184,7 +96,7 @@ export default function NewAd() {
 
                 </form>
                 {error && <div className="error">{error}</div>}
-            </NewAdSection>
+            </FormSection>
         </>
     )
 }

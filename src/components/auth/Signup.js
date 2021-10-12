@@ -3,43 +3,71 @@ import { Link, useHistory } from "react-router-dom";
 import { useMainContext } from "../../context/MainContext";
 import styled from 'styled-components';
 import { db } from "../../firebase";
+import { FormSection, PrimaryBtn } from "../../style/mainStyles";
+import { colors } from "../../style/Colors";
 
-const TempSection = styled.section`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    form {
+const SignupForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     input {
-        padding: 10px;
+        /* padding: 10px; */
         border: 1px solid black;
+        &:focus {
+            outline: 2px solid ${colors.bg1};
+        }
+    }
+    .areaWrap {
+        width: 98%;
     }
     select {
+        border: 1px solid grey;
+        border-radius: 5px;
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
-        padding: 10px;
+        padding: 16px;
+        &:focus {
+            outline: 2px solid ${colors.bg1};
+        }
     }
+
     & > * {
-        margin: 10px;
-        padding: 10px;
+        margin: 5px;
+        padding: 5px;
+    }
+
+    @media (min-width: 700px) {
+        .areaWrap {
+        width: 99%;
     }
     }
-    span {
+`;
+
+const InfoDiv = styled.div`
+    font-family: Roboto;
+
+    .toLoginWrap {
+        /* outline: 1px solid red; */
+
+        display: flex;
+        flex-direction: row;
+        justify-self: center;
+        align-items: center;
+    }
+
+    p {
+        font-size: 16px;
+        margin-right: 5px;
+    }
+
+    a {
         text-decoration: underline;
         font-weight: bold;
-    }
-    button {
         cursor: pointer;
     }
-    a {
-        color: black;
-    }
+
     .error {
         color: red;
     }
@@ -88,41 +116,58 @@ export default function Signup() {
     }
     return (
         <>
-            <TempSection>
+            <FormSection>
                 <h1>Bli medlem</h1>
 
-                <form onSubmit={handleSubmit}>
+                <SignupForm onSubmit={handleSubmit}>
                     <div>
-                        <input placeholder="Namn" type="text" value={name} onChange={e => setName(e.target.value)}>
+                        <div className="label-wrap">
+                            <label>Namn</label>
+                        </div>
+                        <input placeholder="För- och efternamn" type="text" value={name} onChange={e => setName(e.target.value)}>
                         </input>
                     </div>
 
                     <div>
+                        <div className="label-wrap">
+                            <label>Mail</label>
+                        </div>
                         <input
                             type="email"
-                            placeholder="Mail"
+                            placeholder="Ange din mailadress"
                             ref={emailRef}
                             required
                         />
                     </div>
+
                     <div>
+                        <div className="label-wrap">
+                            <label>Lösenord</label>
+                        </div>
                         <input
                             type="password"
-                            placeholder="Lösenord"
+                            placeholder="Ange önskat lösenord"
                             ref={passwordRef}
                             required
                         />
                     </div>
+
                     <div>
+                        <div className="label-wrap">
+                            <label>Repetera lösenord</label>
+                        </div>
                         <input
                             type="password"
-                            placeholder="Repetera lösenord"
+                            placeholder="Repetera önskat lösenord"
                             ref={passwordConfirmRef}
                             required
                         />
                     </div>
-                    <div>
-                        <label>Stadsdel i Stockholm:</label>
+
+                    <div className="areaWrap">
+                        <div className="label-wrap">
+                            <label>Välj stadsdel:</label>
+                        </div>
                         <select value={area} onChange={(e) => setArea(e.target.value)}>
                             <option value="north">Norr</option>
                             <option value="east">Östra</option>
@@ -132,15 +177,20 @@ export default function Signup() {
                         </select>
                     </div>
 
-                    <button disabled={loading} type="submit">
-                        Sign Up
-                    </button>
-                </form>
-                {error && <div className="error">{error}</div>}
-                <Link to="/login">Är du redan medlem? <span>Logga in</span></Link>
+                    <PrimaryBtn disabled={loading} type="submit">
+                        BLI MEDLEM
+                    </PrimaryBtn>
+                </SignupForm>
 
-                {area}
-            </TempSection>
+                <InfoDiv>
+                    {error && <div className="error">{error}</div>}
+                    <div className="toLoginWrap">
+                        <p>Är du redan medlem?</p>
+                        <Link to="/login"> Logga in</Link>
+                    </div>
+                </InfoDiv>
+
+            </FormSection>
         </>
     );
 }
