@@ -15,5 +15,5 @@ An app that let's you borrow & lend things to and from people nearby.
 - React
 - Styled Components
 - Firebase
-- - Authentication
-- - Firestore
+    - Authentication
+    - Firestore
